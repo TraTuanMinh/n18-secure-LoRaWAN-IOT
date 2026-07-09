@@ -57,17 +57,8 @@ Rà soát hệ thống thử nghiệm theo checklist mục V3 (Communication Sec
 - Frame counter hoạt động đúng cơ chế, ngăn chặn được thử nghiệm replay gói tin cũ.
 - Hệ thống đáp ứng các yêu cầu cơ bản về quản lý khóa và xác thực thiết bị theo checklist OWASP ISVS mục V3.
 
-## 5. Ảnh minh chứng
 
-![Thiết bị Join thành công vào The Things Stack](images/join-success.png)
-
-![Serial Monitor firmware Arduino trong quá trình OTAA](images/serial-log.png)
-
-![Gói tin bắt được cho thấy payload đã được mã hóa](images/packet-encrypted.png)
-
-![Kết quả rà soát theo checklist OWASP ISVS](images/isvs-checklist.png)
-
-## 6. Giới hạn an toàn
+## 5. Giới hạn an toàn
 
 - Thử nghiệm được thực hiện trong môi trường lab cô lập, không tấn công lên hạ tầng LoRaWAN của bên thứ ba hoặc hệ thống sản xuất thực tế.
 - Không thực hiện jamming, brute-force khóa hoặc các hình thức tấn công gây gián đoạn dịch vụ trên thiết bị không thuộc quyền sở hữu của nhóm.
@@ -75,7 +66,7 @@ Rà soát hệ thống thử nghiệm theo checklist mục V3 (Communication Sec
 - Kết quả đánh giá theo OWASP ISVS chỉ mang tính chất tham khảo học thuật, không thay thế cho một audit bảo mật chính thức.
 - Mọi khóa mẫu sử dụng trong tài liệu này đều là khóa giả lập cho mục đích thử nghiệm.
 
-## 7. Tài liệu tham khảo kỹ thuật
+## 6. Tài liệu tham khảo kỹ thuật
 
 | Tài liệu | Nguồn | Nhánh/Thẻ | Ngày truy cập | Phần sử dụng |
 |---|---|---|---|---|
@@ -83,7 +74,7 @@ Rà soát hệ thống thử nghiệm theo checklist mục V3 (Communication Sec
 | [MCCI Arduino LoRaWAN](https://github.com/mcci-catena/arduino-lorawan) | MCCI Corporation | `master` | 09/07/2026 | Thư viện firmware cho thiết bị đầu cuối; sketch mẫu trong `examples/` triển khai quy trình OTAA và mã hóa AES-128 khi gửi dữ liệu cảm biến |
 | [OWASP ISVS](https://github.com/OWASP/IoT-Security-Verification-Standard-ISVS) | OWASP | `master` | 09/07/2026 | Checklist mục V3 (Communication Security) và V4 (Software Platform Security) dùng làm khung tham chiếu đánh giá hệ thống thử nghiệm |
 
-## 8. Cấu trúc thư mục
+## 7. Cấu trúc thư mục
 
 ```
 .
