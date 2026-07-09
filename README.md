@@ -74,14 +74,3 @@ Rà soát hệ thống thử nghiệm theo checklist mục V3 (Communication Sec
 | [MCCI Arduino LoRaWAN](https://github.com/mcci-catena/arduino-lorawan) | MCCI Corporation | `master` | 09/07/2026 | Thư viện firmware cho thiết bị đầu cuối; sketch mẫu trong `examples/` triển khai quy trình OTAA và mã hóa AES-128 khi gửi dữ liệu cảm biến |
 | [OWASP ISVS](https://github.com/OWASP/IoT-Security-Verification-Standard-ISVS) | OWASP | `master` | 09/07/2026 | Checklist mục V3 (Communication Security) và V4 (Software Platform Security) dùng làm khung tham chiếu đánh giá hệ thống thử nghiệm |
 
-## 7. Cấu trúc thư mục
-
-```
-.
-├── README.md
-├── firmware/           # Mã nguồn firmware cho thiết bị, dựa trên MCCI Arduino LoRaWAN
-├── server-config/      # File cấu hình/docker-compose cho The Things Stack
-├── images/             # Ảnh minh chứng
-└── docs/               # Ghi chú đánh giá theo OWASP ISVS, log thử nghiệm
-```
-
