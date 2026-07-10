@@ -1,0 +1,68 @@
+services:
+  redis:
+    image: redis:6.2-alpine
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+    networks:
+      - ttn-network
+
+  postgres:
+    image: postgres:14-alpine
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=ttn_lorawan_is
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - ttn-network
+
+  stack:
+    image: thethingsnetwork/lorawan-stack:3.24.0
+    entrypoint: ttn-lw-stack
+    command: start
+    environment:
+      - TTN_LW_LOG_LEVEL=info
+      - TTN_LW_BLOB_STORAGE_PROVIDER=local
+      - TTN_LW_BLOB_STORAGE_LOCAL_DIRECTORY=/srv/ttn-lorawan-stack/public/blob
+      - TTN_LW_REDIS_ADDRESS=redis:6379
+      - TTN_LW_REDIS_FAILOVER_ADDRESSES=redis:6379
+      - TTN_LW_IS_DATABASE_URI=postgresql://root:root@postgres:5432/ttn_lorawan_is?sslmode=disable
+      - TTN_LW_HTTP_COOKIE_BLOCK_KEY=0693ac82389359cb54cd7dc31720466ae37c1c86901b376f5b181caf0d4df61e
+      - TTN_LW_HTTP_COOKIE_HASH_KEY=9e9f8e04a66663bae2609e14e67397cacfbd41b7bcc761bc63324def634815ee6b144c605dc4cd40b621b5af1aceaac563cd300b620663acdf6f64a67542a457
+      - TTN_LW_TLS=false
+      - TTN_LW_IS_TLS=false
+      - TTN_LW_CONSOLE_TLS=false
+      - TTN_LW_GATEWAY_SERVER_TLS=false
+      - TTN_LW_NETWORK_SERVER_TLS=false
+      - TTN_LW_APPLICATION_SERVER_TLS=false
+      - TTN_LW_JOIN_SERVER_TLS=false
+      - TTN_LW_CONSOLE_WEB_REDIRECT_TO_HTTPS=false
+      - TTN_LW_GRPC_LISTEN_TLS=
+      - TTN_LW_HTTP_LISTEN_TLS=
+      - TTN_LW_INTEROP_LISTEN=
+      - TTN_LW_INTEROP_LISTEN_TLS=
+      - TTN_LW_IS_OAUTH_UI_CANONICAL_URL=http://localhost:1885/oauth
+      - TTN_LW_CONSOLE_UI_CANONICAL_URL=http://localhost:1885/console
+      - TTN_LW_CONSOLE_OAUTH_CLIENT_ID=console
+      - TTN_LW_CONSOLE_OAUTH_CLIENT_SECRET=console
+    volumes:
+      - ttn-data:/srv/ttn-lorawan-stack
+    ports:
+      - "1885:1885"
+      - "1884:1884"
+    networks:
+      - ttn-network
+    depends_on:
+      - redis
+      - postgres
+
+volumes:
+  redis-data:
+  postgres-data:
+  ttn-data:
+
+networks:
+  ttn-network:
+    name: ttn-network
